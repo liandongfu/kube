@@ -10,4 +10,3 @@ spec:
         - configMapRef:
             name: game-demo
           prefix: MY_PREFIX_     # 名前衝突しないように prefix を指定することもできる
-
