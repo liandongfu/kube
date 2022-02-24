@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: spring-boot-ap-dp
+  name: spring-boot-ap-dp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: spring-boot-ap-dp
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: spring-boot-ap-dp
+    spec:
+      containers:
+      - image: spring-boot-ap:latest
+        name: spring-boot-ap
+        imagePullPolicy: Never
+        resources: {}
+status: {}

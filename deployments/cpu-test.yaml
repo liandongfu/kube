@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: flask-cache
+  name: flask-cache-dep
 spec:
   replicas: 1
   selector:
@@ -22,7 +22,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: flask-cache
+  name: flask-cache-service
 spec:
   selector:
     name: flask-cache
@@ -33,15 +33,20 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: flask-cache
+  name: flask-cache-ingress
 spec:
-  rules:
-    - http:
-        paths:
-          - backend:
-              service:
-                name: flask-cache
-                port:
-                  number: 80
-            path: /
-            pathType: Prefix
+  defaultBackend:
+    service:
+      name: flask-cache
+      port:
+        number: 80
+#  rules:
+#    - http:
+#        paths:
+#          - backend:
+#              service:
+#                name: flask-cache
+#                port:
+#                  number: 80
+#            path: /
+#            pathType: Prefix

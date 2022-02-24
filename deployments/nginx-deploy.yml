@@ -1,21 +1,52 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nginx-deployment2
-  labels:
-    app: nginx
+  name: nginx-deployment
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
-      app: nginx
+      name: nginx-ct
   template:
     metadata:
       labels:
-        app: nginx
+        name: nginx-ct
     spec:
       containers:
         - name: nginx
           image: nginx:1.14.2
           ports:
             - containerPort: 80
+              name: nginx-test
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-service
+spec:
+  selector:
+    name: nginx
+  ports:
+    - port: 80
+      targetPort: 80
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: nginx-ingress
+spec:
+#  rules:
+#    - http:
+#        paths:
+#          - backend:
+#              service:
+#                name: nginx-service
+#                port:
+#                  number: 8081
+#            path: /
+#            pathType: Prefix
+  defaultBackend:
+    service:
+      name: nginx-service
+      port:
+        number: 80
