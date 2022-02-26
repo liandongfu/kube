@@ -39,14 +39,14 @@ spec:
 #    - http:
 #        paths:
 #          - backend:
-#              service:
-#                name: nginx-service
+#              service.yaml:
+#                name: nginx-service.yaml
 #                port:
 #                  number: 8081
 #            path: /
 #            pathType: Prefix
   defaultBackend:
     service:
-      name: nginx-service
+      name: nginx-service.yaml
       port:
         number: 80

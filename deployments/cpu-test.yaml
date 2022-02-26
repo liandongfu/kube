@@ -13,7 +13,7 @@ spec:
         name: flask-cache
     spec:
       containers:
-        - name: cache-service
+        - name: cache-service.yaml
           image: xasag94215/flask-cache
           ports:
             - containerPort: 5000
@@ -44,7 +44,7 @@ spec:
 #    - http:
 #        paths:
 #          - backend:
-#              service:
+#              service.yaml:
 #                name: flask-cache
 #                port:
 #                  number: 80
