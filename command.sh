@@ -29,3 +29,6 @@ $ kubectl create service clusterip spring-boot-ap-dp --tcp 80:8080 -o yaml --dry
 eval $(minikube -p minikube docker-env)
 
 kubectl port-forward svc/spring-boot-ap-dp 9090:80
+
+kubectl apply -k .
+kubectl delete -k .
