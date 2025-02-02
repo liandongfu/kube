@@ -6,7 +6,7 @@ spec:
   type: NodePort
   ports:
     - port: 5432
-#      targetPort: 5432
+      #      targetPort: 5432
       nodePort: 5432
   selector:
     app: postgres
@@ -36,6 +36,13 @@ spec:
           ports:
             - containerPort: 5432
               name: postgres
+          resources:
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+            requests:
+              memory: "256Mi"
+              cpu: "250m"
           volumeMounts:
             - name: postgres-persistent-storage
               mountPath: /var/lib/postgres

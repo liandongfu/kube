@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mapconfig-test
+spec:
+  containers:
+    - name: mapconfig-test
+      image: nginx:latest
+      envFrom: # env ではなく envFrom
+        - configMapRef:
+            name: game-demo
+          prefix: MY_PREFIX_ # 名前衝突しないように prefix を指定することもできる
+      resources:
+        limits:
+          memory: "128Mi"
+          cpu: "500m"
+        requests:
+          memory: "64Mi"
+          cpu: "250m"

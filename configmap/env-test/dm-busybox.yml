@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cmTest-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: cm-test
+  template:
+    metadata:
+      labels:
+        name: cm-test
+    spec:
+      containers:
+        - name: test-container
+          image: k8s.gcr.io/busybox
+          command: ["/bin/sh", "-c", "env"]
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+            requests:
+              memory: "64Mi"
+              cpu: "250m"
+          env:
+            # 定义环境变量
+            - name: SPECIAL_LEVEL_KEY
+              valueFrom:
+                configMapKeyRef:
+                  # ConfigMap 包含你要赋给 SPECIAL_LEVEL_KEY 的值
+                  name: special-config
+                  # 指定与取值相关的键名
+                  key: special.how
