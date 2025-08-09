@@ -1,0 +1,60 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: nginx-ct
+  template:
+    metadata:
+      labels:
+        name: nginx-ct
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:latest
+          imagePullPolicy: Always
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "250m"
+              memory: "256Mi"
+          ports:
+            - containerPort: 80
+              name: nginx-test
+# ---
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: nginx-service
+# spec:
+#   selector:
+#     name: nginx
+#   ports:
+#     - port: 80
+#       targetPort: 80
+# ---
+# apiVersion: networking.k8s.io/v1
+# kind: Ingress
+# metadata:
+#   name: nginx-ingress
+# spec:
+#   #  rules:
+#   #    - http:
+#   #        paths:
+#   #          - backend:
+#   #              service.yaml:
+#   #                name: nginx-service.yaml
+#   #                port:
+#   #                  number: 8081
+#   #            path: /
+#   #            pathType: Prefix
+#   defaultBackend:
+#     service:
+#       name: nginx-service
+#       port:
+#         number: 80
