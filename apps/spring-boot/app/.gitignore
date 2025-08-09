@@ -1,2 +1,5 @@
 /.idea/
-/.mvn/
+/.settings/
+/.gradle/
+/bin/
+/build/
